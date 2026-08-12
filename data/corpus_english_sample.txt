@@ -1,0 +1,12 @@
+Discrete mathematics is the branch of mathematics dealing with objects that can
+assume only distinct, separated values. It includes graph theory, combinatorics,
+number theory, and mathematical logic. Cryptography relies heavily on discrete
+mathematics, especially number theory and combinatorics. Classical ciphers such
+as the Caesar cipher, the substitution cipher, and the Vigenere cipher are simple
+historical examples of how mathematical structures can be used to protect
+information. Modern cryptography extends these ideas using finite fields, modular
+arithmetic, and computational complexity theory to build systems that are secure
+against powerful adversaries. The study of these classical methods also teaches
+valuable lessons about statistical analysis, since natural language exhibits a
+highly non uniform distribution of letters, and this property can be exploited
+to break ciphers that do not sufficiently randomize the underlying text.
