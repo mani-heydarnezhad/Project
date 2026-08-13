@@ -9,18 +9,7 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * تست‌های ماژول رمز جانشینی: صحت رمزگذاری/رمزگشایی، اعتبارسنجی کلید،
- * حدس اولیه بر پایه فراوانی، و بهبود امتیاز با تپه‌نوردی.
- *
- * نکته‌ی مهم درباره‌ی تست تپه‌نوردی: بر خلاف رمز سزار که فضای کلید کوچک (n)
- * دارد و شکست آن قطعی است، شکست رمز جانشینی با تپه‌نوردی یک الگوریتم
- * ابتکاری (heuristic) است و *تضمینی* برای بازیابی کامل کلید روی متن‌های
- * کوتاه یا با پیکره‌ی آموزشی کوچک وجود ندارد (این موضوع دقیقاً در بخش ۷.۲
- * گزارش، نمودار نرخ موفقیت بر حسب طول متن، مستند شده است). بنابراین تست
- * زیر *بهبود امتیاز* را بررسی می‌کند، نه تساوی دقیق با متن اصلی —
- * رویکردی واقع‌بینانه و غیرشکننده (non-brittle) برای این نوع الگوریتم.
- */
+
 class SubstitutionCipherTest {
 
     private static final Alphabet ALPHABET = Alphabet.english();
@@ -38,7 +27,7 @@ class SubstitutionCipherTest {
     @Test
     void invalidKeyWithDuplicateThrows() {
         int[] badKey = new int[26];
-        // دو حرف به یک مقصد نگاشت شده‌اند -> جایگشت نامعتبر
+        
         for (int i = 0; i < 26; i++) badKey[i] = 0;
         assertThrows(IllegalArgumentException.class, () -> cipher.encrypt("test", badKey));
     }
