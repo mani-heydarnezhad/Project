@@ -1,22 +1,12 @@
 package util;
 
-/**
- * محاسبه‌ی آنتروپی شانون — بخش امتیازی (بخش ۶ گزارش اصلی).
- *
- *   H(X) = − Σ_i P(xi) · log2( P(xi) )
- *
- * برای مقایسه‌ی آنتروپی متن اصلی و متن رمزشده با رمزهای مختلف: از آنجا که
- * رمزهای سزار و جانشینی فقط جایگشت (برچسب‌گذاری مجدد) حروف را انجام می‌دهند
- * و توزیع آماری فراوانی حروف را تغییر نمی‌دهند، آنتروپی متن رمزشده با این
- * رمزها دقیقاً برابر با آنتروپی متن اصلی است. رمز ویژنر با کلید بلند، توزیع
- * را به سمت یکنواخت‌تر (و آنتروپی را به سمت log2(n)) نزدیک می‌کند.
- */
+
 public final class ShannonEntropy {
 
     private ShannonEntropy() {
     }
 
-    /** آنتروپی شانون بر حسب بیت بر نویسه، بر پایه‌ی فراوانی حروف الفبای داده‌شده */
+    
     public static double compute(String text, Alphabet alphabet) {
         int n = alphabet.size();
         long[] counts = new long[n];
@@ -39,16 +29,12 @@ public final class ShannonEntropy {
         return entropy;
     }
 
-    /** حداکثر آنتروپی نظری برای الفبای اندازه n (توزیع کاملاً یکنواخت): log2(n) */
+    
     public static double maxEntropy(int alphabetSize) {
         return Math.log(alphabetSize) / Math.log(2);
     }
 
-    /**
-     * درصد بهره‌وری آنتروپی نسبت به حداکثر ممکن — معیاری از میزان
-     * «تصادفی‌نمایی» (randomness) ظاهری متن. مقدار پایین یعنی افزونگی بالا
-     * (مانند متن زبان طبیعی)، مقدار نزدیک ۱۰۰٪ یعنی توزیع نزدیک یکنواخت.
-     */
+    
     public static double entropyEfficiencyPercent(String text, Alphabet alphabet) {
         double h = compute(text, alphabet);
         double hMax = maxEntropy(alphabet.size());

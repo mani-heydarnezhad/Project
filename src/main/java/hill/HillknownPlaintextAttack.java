@@ -13,18 +13,13 @@ public final class HillKnownPlaintextAttack {
         this.blockSize = blockSize;
     }
 
-    /**
-     * بازیابی ماتریس کلید K از m جفت بلوک مستقل خطی.
-     * @param plaintextBlocks ماتریس m×m؛ هر ستون یک بلوک متن اصلی (طول m)
-     * @param ciphertextBlocks ماتریس m×m متناظر؛ هر ستون یک بلوک متن رمزشده
-     */
+    
     public int[][] recoverKey(int[][] plaintextBlocks, int[][] ciphertextBlocks) {
         int n = alphabet.size();
         int m = blockSize;
 
         int[][] xInverse = HillCipher.invertMatrixModN(plaintextBlocks, n);
 
-        // K = Y · X⁻¹ (mod n)
         int[][] key = new int[m][m];
         for (int row = 0; row < m; row++) {
             for (int col = 0; col < m; col++) {
@@ -38,11 +33,7 @@ public final class HillKnownPlaintextAttack {
         return key;
     }
 
-    /**
-     * ابزار کمکی: استخراج m جفت بلوک متن اصلی/رمزشده از یک زوج متن شناخته‌شده،
-     * برای تغذیه به {@link #recoverKey}. بلوک‌ها به صورت ستونی (column-major)
-     * در ماتریس خروجی چیده می‌شوند، مطابق قرارداد X و Y در فرمول بالا.
-     */
+    
     public int[][][] extractBlockMatrices(String plaintext, String ciphertext) {
         int[] pVec = toVector(plaintext);
         int[] cVec = toVector(ciphertext);
@@ -50,7 +41,7 @@ public final class HillKnownPlaintextAttack {
         int numBlocks = pVec.length / m;
         if (numBlocks < m) {
             throw new IllegalArgumentException(
-                    "برای بازیابی کلید بلوک " + m + "×" + m + " حداقل به " + m + " بلوک مستقل نیاز است.");
+                    "To recover the " + m + "×" + m + " block key, at least " + m + " independent blocks are required.");
         }
         int[][] X = new int[m][m];
         int[][] Y = new int[m][m];

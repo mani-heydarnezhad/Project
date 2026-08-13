@@ -5,17 +5,7 @@ import util.FrequencyTable;
 
 import java.util.*;
 
-/**
- * حدس اولیه‌ی کلید رمز جانشینی با تطبیق فراوانی حروف متن رمزشده با ترتیب
- * فراوانی مرجع زبان (بخش ۳.۲ گزارش، گام اول و دوم):
- *
- *  ۱) محاسبه فراوانی هر حرف در متن رمزشده
- *  ۲) مرتب‌سازی نزولی و تطبیق با ترتیب فراوانی زبان مرجع (e,t,a,o,i,n,...)
- *
- * این حدس اولیه به تنهایی معمولاً کلید کامل درست را نمی‌دهد (چون فراوانی‌های
- * نزدیک به هم می‌توانند جابه‌جا شوند)؛ خروجی آن ورودی الگوریتم تپه‌نوردی
- * (HillClimbingAttack) قرار می‌گیرد.
- */
+
 public final class FrequencyAnalysisAttack {
 
     private final Alphabet alphabet;
@@ -26,10 +16,10 @@ public final class FrequencyAnalysisAttack {
         this.reference = reference;
     }
 
-    /**
-     * تولید حدس اولیه‌ی جایگشت رمزگشایی (decryption key) بر اساس تطبیق رتبه‌ی
-     * فراوانی. خروجی: آرایه‌ی key به‌طوری‌که plaintextIndex = key[ciphertextIndex].
-     */
+    
+    //تولید حدس اولیه‌ی جایگشت رمزگشایی (decryption key) بر اساس تطبیق رتبه‌ی
+    //فراوانی. خروجی: آرایه‌ی key به‌طوری‌که plaintextIndex = key[ciphertextIndex].
+     
     public int[] initialGuess(String ciphertext) {
         int n = alphabet.size();
         long[] counts = new long[n];

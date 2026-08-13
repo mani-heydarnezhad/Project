@@ -2,15 +2,7 @@ package vigenere;
 
 import util.Alphabet;
 
-/**
- * رمز ویژنر (Vigenère Cipher) — تعمیم چندالفبایی رمز سزار.
- * مدل ریاضی (بخش ۴.۱ گزارش):
- *   Ei = (xi + k_{(i mod L)}) mod n
- * که K = k1 k2 ... kL کلید به طول L و n اندازه‌ی الفبا است.
- *
- * کلید به صورت رشته‌ی متنی داده می‌شود و هر حرف آن به عدد در Z_n نگاشت
- * می‌شود (مثلاً برای انگلیسی: 'a' -> 0, 'b' -> 1, ...).
- */
+
 public final class VigenereCipher {
 
     private final Alphabet alphabet;
@@ -30,10 +22,10 @@ public final class VigenereCipher {
     private String shift(String text, String key, int sign) {
         int[] keyIndices = keyToIndices(key);
         if (keyIndices.length == 0) {
-            throw new IllegalArgumentException("کلید باید حداقل یک حرف معتبر از الفبا داشته باشد.");
+            throw new IllegalArgumentException("The key must contain at least one valid alphabetic character.");
         }
         StringBuilder sb = new StringBuilder(text.length());
-        int keyPos = 0; // فقط برای حروف موجود در الفبا پیش می‌رود
+        int keyPos = 0; 
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
             int idx = alphabet.indexOf(c);
@@ -61,7 +53,7 @@ public final class VigenereCipher {
         return arr;
     }
 
-    /** فضای کلید n^L برای طول کلید مشخص L (بخش ۴.۱ گزارش) */
+    
     public java.math.BigInteger keySpaceSize(int keyLength) {
         return java.math.BigInteger.valueOf(alphabet.size()).pow(keyLength);
     }

@@ -37,7 +37,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <mainClass>caesar.CaesarDemo</mainClass>
+                    <mainClass>cli.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

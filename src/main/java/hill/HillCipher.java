@@ -2,20 +2,11 @@ package hill;
 
 import util.Alphabet;
 
-/**
- * رمز هیل (Hill Cipher) — بخش امتیازی (بخش ۵ گزارش).
- * مبتنی بر جبر خطی روی حلقه‌ی پیمانه‌ای Z_n.
- *
- * مدل ریاضی:
- *   y = K·x (mod n)      [رمزگذاری بلوکی با ماتریس کلید K اندازه m×m]
- *   x = K⁻¹·y (mod n)    [رمزگشایی]
- *
- * برای وجود K⁻¹ در Z_n لازم و کافی است gcd(det(K), n) = 1 باشد.
- */
+
 public final class HillCipher {
 
     private final Alphabet alphabet;
-    private final int blockSize; // m
+    private final int blockSize; 
 
     public HillCipher(Alphabet alphabet, int blockSize) {
         this.alphabet = alphabet;
@@ -26,7 +17,7 @@ public final class HillCipher {
         return blockSize;
     }
 
-    /** رمزگذاری متن با ماتریس کلید K (اندازه m×m)؛ متن با پرکردن (padding) به مضرب m می‌رسد. */
+   
     public String encrypt(String plaintext, int[][] key) {
         validateKeyInvertible(key);
         int[] vector = textToVector(plaintext, true);
@@ -71,7 +62,7 @@ public final class HillCipher {
         }
         if (pad) {
             while (list.size() % blockSize != 0) {
-                list.add(alphabet.indexOf('x') >= 0 ? alphabet.indexOf('x') : 0); // padding استاندارد با 'x'
+                list.add(alphabet.indexOf('x') >= 0 ? alphabet.indexOf('x') : 0); 
             }
         }
         int[] arr = new int[list.size()];
@@ -90,11 +81,10 @@ public final class HillCipher {
         int g = gcd(Math.floorMod(det, alphabet.size()), alphabet.size());
         if (g != 1) {
             throw new IllegalArgumentException(
-                    "ماتریس کلید معکوس‌پذیر نیست: gcd(det=" + det + ", n=" + alphabet.size() + ") = " + g);
+                    "The key matrix is not invertible: gcd(det=" + det + ", n=" + alphabet.size() + ") = " + g);
         }
     }
 
-    // ---- عملیات جبر خطی روی Z_n ----
 
     public static int determinantModN(int[][] matrix, int n) {
         int size = matrix.length;
@@ -102,7 +92,7 @@ public final class HillCipher {
         if (size == 2) {
             return Math.floorMod(matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0], n);
         }
-        // بسط لاپلاس برای اندازه‌های بزرگ‌تر (کافی برای بلوک‌های کوچک آموزشی)
+        
         int det = 0;
         for (int col = 0; col < size; col++) {
             int minorDet = determinantModN(minor(matrix, 0, col), n);
@@ -129,17 +119,17 @@ public final class HillCipher {
         return result;
     }
 
-    /** معکوس ضرب‌پذیر a در Z_n با الگوریتم اقلیدسی توسعه‌یافته */
+    
     public static int modInverse(int a, int n) {
         a = Math.floorMod(a, n);
         int[] r = extendedGCD(a, n);
         if (r[0] != 1) {
-            throw new IllegalArgumentException("معکوس ضرب‌پذیر وجود ندارد: gcd(" + a + "," + n + ")=" + r[0]);
+            throw new IllegalArgumentException("There is no multiplicative inverse: gcd(" + a + "," + n + ")=" + r[0]);
         }
         return Math.floorMod(r[1], n);
     }
 
-    /** بازگرداندن [gcd, x, y] به‌طوری‌که a*x + b*y = gcd(a,b) */
+   
     private static int[] extendedGCD(int a, int b) {
         if (b == 0) return new int[]{a, 1, 0};
         int[] r = extendedGCD(b, a % b);
@@ -156,7 +146,7 @@ public final class HillCipher {
         return a;
     }
 
-    /** معکوس ماتریس K در Z_n: K⁻¹ = det(K)⁻¹ · adj(K) (mod n) */
+    
     public static int[][] invertMatrixModN(int[][] key, int n) {
         int size = key.length;
         int det = determinantModN(key, n);
@@ -168,7 +158,7 @@ public final class HillCipher {
                 int minorDet = determinantModN(minor(key, r, c), n);
                 int sign = ((r + c) % 2 == 0) ? 1 : -1;
                 int cofactor = Math.floorMod(sign * minorDet, n);
-                adjugate[c][r] = cofactor; // ترانهاده برای adjugate
+                adjugate[c][r] = cofactor; 
             }
         }
 

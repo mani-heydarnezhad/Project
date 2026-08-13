@@ -4,18 +4,7 @@ import util.Alphabet;
 
 import java.util.*;
 
-/**
- * آزمون کاسیسکی (Kasiski Examination) برای برآورد طول کلید رمز ویژنر
- * (بخش ۴.۲ گزارش).
- *
- * ایده: اگر یک زیررشته‌ی تکراری (معمولاً طول ۳ یا بیشتر) در متن اصلی، در
- * فاصله‌ای برابر با مضرب طول کلید L ظاهر شود، رمزشده‌ی آن دو رخداد نیز
- * (چون هر دو با همان بخش از کلید رمز شده‌اند) یکسان خواهد بود. با یافتن
- * فاصله‌ی میان تکرارهای یکسان در متن رمزشده و محاسبه‌ی gcd این فاصله‌ها،
- * می‌توان L را برآورد کرد:
- *
- *   L ≈ gcd(d1, d2, ..., dm)
- */
+
 public final class KasiskiExamination {
 
     private final Alphabet alphabet;
@@ -36,9 +25,9 @@ public final class KasiskiExamination {
         }
     }
 
-    /** یافتن تمام دنباله‌های تکراری با طول >= minSequenceLength و فاصله‌ی آن‌ها */
+   
     public Distances findRepeatedSequenceDistances(String ciphertext) {
-        // فقط حروف الفبا (بدون فاصله/علائم) در نظر گرفته می‌شود تا فاصله‌ها معنادار باشند
+        
         StringBuilder cleanedBuilder = new StringBuilder();
         for (int i = 0; i < ciphertext.length(); i++) {
             if (alphabet.indexOf(ciphertext.charAt(i)) >= 0) {
@@ -59,7 +48,7 @@ public final class KasiskiExamination {
             Map.Entry<String, List<Integer>> entry = it.next();
             List<Integer> pos = entry.getValue();
             if (pos.size() < 2) {
-                it.remove(); // دنباله‌های غیرتکراری حذف می‌شوند
+                it.remove(); 
                 continue;
             }
             for (int i = 1; i < pos.size(); i++) {
@@ -69,11 +58,7 @@ public final class KasiskiExamination {
         return new Distances(positions, distances);
     }
 
-    /**
-     * برآورد طول کلید محتمل با محاسبه‌ی gcd همه‌ی فاصله‌ها.
-     * در صورت وجود نویز آماری، رایج‌ترین مقسوم‌علیه‌های کوچک (2 تا maxKeyLength)
-     * که بیشترین تعداد فاصله را می‌شمارند به عنوان کاندید برگردانده می‌شوند.
-     */
+   
     public List<Integer> estimateKeyLengthCandidates(List<Integer> distances, int maxKeyLength) {
         int[] votes = new int[maxKeyLength + 1];
         for (int d : distances) {

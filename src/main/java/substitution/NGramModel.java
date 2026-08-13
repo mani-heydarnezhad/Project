@@ -5,35 +5,25 @@ import util.Alphabet;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * مدل زبانی n-gram (دوگرام/سه‌گرام) ساخته‌شده از یک پیکره‌ی متنی، برای
- * محاسبه‌ی log-likelihood در الگوریتم تپه‌نوردی (بخش ۳.۲ گزارش):
- *
- *   Score(π) = Σ log P( π(Ci), π(Ci+1) )     [حالت دوگرام]
- *
- * برای جلوگیری از log(0)، احتمال هر n-gram دیده‌نشده با هموارسازی
- * افزایشی (add-one / Laplace smoothing) محاسبه می‌شود:
- *
- *   P(a,b) = (count(a,b) + 1) / (Σ_{x,y} count(x,y) + n²)
- */
+
 public final class NGramModel {
 
     private final Alphabet alphabet;
-    private final int n;                 // اندازه الفبا
-    private final int order;             // 2 = bigram , 3 = trigram
+    private final int n;                 
+    private final int order;             
     private final Map<String, Long> counts = new HashMap<>();
     private long totalCount = 0;
 
     public NGramModel(Alphabet alphabet, int order) {
         if (order != 2 && order != 3) {
-            throw new IllegalArgumentException("فقط دوگرام (2) یا سه‌گرام (3) پشتیبانی می‌شود.");
+            throw new IllegalArgumentException("Only 2-gram or 3-gram is supported.");
         }
         this.alphabet = alphabet;
         this.order = order;
         this.n = alphabet.size();
     }
 
-    /** یادگیری مدل از یک پیکره‌ی متنی (کامیت الزامی نفر B) */
+    
     public void train(String corpus) {
         StringBuilder cleaned = new StringBuilder();
         for (int i = 0; i < corpus.length(); i++) {
@@ -49,7 +39,7 @@ public final class NGramModel {
         }
     }
 
-    /** لگاریتم احتمال هموارشده‌ی یک n-gram (add-one smoothing) */
+    
     public double logProbability(String gram) {
         long c = counts.getOrDefault(gram, 0L);
         double denomStates = Math.pow(n, order);
@@ -57,11 +47,6 @@ public final class NGramModel {
         return Math.log(p);
     }
 
-    /**
-     * امتیاز log-likelihood کل یک متن (مجموع لگاریتم احتمال تمام n-gram های آن)؛
-     * دقیقاً معادل فرمول Score(π) بخش ۳.۲ گزارش وقتی متن، خروجیِ رمزگشاییِ
-     * فرضی با جایگشت π است.
-     */
     public double scoreText(String text) {
         StringBuilder cleaned = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {

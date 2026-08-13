@@ -20,7 +20,7 @@ public final class FrequencyTable {
         this.relativeFrequency = relativeFrequency;
     }
 
-    /** جدول فراوانی مرجع زبان انگلیسی (منابع کلاسیک تحلیل رمز) */
+    // جدول فراوانی مرجع زبان انگلیسی (منابع کلاسیک تحلیل رمز) 
     public static FrequencyTable englishReference() {
         // ترتیب مطابق Alphabet.ENGLISH: a b c d e f g h i j k l m n o p q r s t u v w x y z
         double[] freq = {
@@ -30,11 +30,6 @@ public final class FrequencyTable {
         return new FrequencyTable(Alphabet.english(), freq);
     }
 
-    /**
-     * جدول فراوانی مرجع تقریبی زبان فارسی (باید توسط تیم از یک پیکره‌ی بزرگ
-     * واقعی -مثلاً اخبار یا کتاب- با متد استخراج و جایگزین شود.
-     * مقادیر فعلی صرفاً برآورد اولیه برای تست ساختار برنامه است.
-     */
     public static FrequencyTable persianApproximate() {
         int n = Alphabet.persian().size();
         double[] freq = new double[n];
@@ -55,7 +50,7 @@ public final class FrequencyTable {
         }
         double[] freq = new double[alphabet.size()];
         if (total == 0) {
-            throw new IllegalArgumentException("پیکره حاوی هیچ حرفی از الفبای داده‌شده نیست.");
+            throw new IllegalArgumentException("The corpus does not contain any characters from the given alphabet.");
         }
         for (int i = 0; i < counts.length; i++) {
             freq[i] = 100.0 * counts[i] / total;
@@ -75,7 +70,7 @@ public final class FrequencyTable {
         return relativeFrequency.clone();
     }
 
-    /** نمایش خوانا به صورت map حرف -> درصد، مرتب‌شده بر اساس فراوانی نزولی */
+    // نمایش خوانا به صورت map حرف -> درصد، مرتب‌شده بر اساس فراوانی نزولی 
     public Map<Character, Double> sortedByFrequencyDescending() {
         Map<Character, Double> map = new LinkedHashMap<>();
         Integer[] order = new Integer[relativeFrequency.length];

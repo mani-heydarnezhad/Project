@@ -30,23 +30,23 @@ public final class Alphabet {
         return new Alphabet(PERSIAN);
     }
 
-    /** اندازه الفبا n (مطابق فرمول |K| = n در گزارش، بخش ۲.۲) */
+    // اندازه الفبا n (مطابق فرمول |K| = n در گزارش، بخش ۲.۲) 
     public int size() {
         return n;
     }
 
-    /** آیا این کاراکتر عضو الفبا است (بدون حساسیت به بزرگی/کوچکی حروف لاتین) */
+    // آیا این کاراکتر عضو الفبا است (بدون حساسیت به بزرگی/کوچکی حروف لاتین)
     public boolean contains(char c) {
         return indexOf(c) >= 0;
     }
 
-    /** نگاشت حرف -> عدد در Z_n ؛ اگر عضو الفبا نباشد -1 برمی‌گرداند */
+    // نگاشت حرف -> عدد در Z_n ؛ اگر عضو الفبا نباشد -1 برمی‌گرداند
     public int indexOf(char c) {
         char lower = Character.toLowerCase(c);
         return letters.indexOf(lower);
     }
 
-    /** نگاشت عدد در Z_n -> حرف؛ حالت حروف بزرگ لاتین اصلی حفظ می‌شود */
+    // نگاشت عدد در Z_n -> حرف؛ حالت حروف بزرگ لاتین اصلی حفظ می‌شود 
     public char charAt(int index, boolean upperCase) {
         int m = Math.floorMod(index, n);
         char c = letters.charAt(m);

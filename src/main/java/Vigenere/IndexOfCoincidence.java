@@ -5,14 +5,7 @@ import util.Alphabet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * شاخص تطابق (Index of Coincidence – IC) — بخش ۴.۳ گزارش.
- *
- *   IC = [ Σ_{i=0}^{n-1} fi (fi − 1) ] / [ N (N − 1) ]
- *
- * که fi فراوانی مطلق حرف i و N طول کل متن است. برای زبان انگلیسی طبیعی
- * IC ≈ 0.065–0.070 و برای متن تصادفی/رمز جانشینی با کلید بلند IC ≈ 1/n ≈ 0.038.
- */
+
 public final class IndexOfCoincidence {
 
     private final Alphabet alphabet;
@@ -42,14 +35,8 @@ public final class IndexOfCoincidence {
         return numerator / denominator;
     }
 
-    /**
-     * برای هر طول کلید فرضی L در بازه‌ی [1, maxKeyLength]، متن رمزشده به L
-     * زیرمتن (بر اساس موقعیت i mod L) تقسیم شده و میانگین IC این زیرمتن‌ها
-     * محاسبه می‌شود. طولی که میانگین IC آن به بازه‌ی طبیعی زبان (~0.065-0.070
-     * برای انگلیسی) نزدیک‌تر باشد، به عنوان طول کلید محتمل انتخاب می‌شود.
-     */
     public double[] averageICForKeyLengths(String ciphertext, int maxKeyLength) {
-        // فقط حروف الفبا برای صحت شاخص‌گذاری i mod L در نظر گرفته می‌شود
+        
         StringBuilder cleanedBuilder = new StringBuilder();
         for (int i = 0; i < ciphertext.length(); i++) {
             if (alphabet.indexOf(ciphertext.charAt(i)) >= 0) {
@@ -58,7 +45,7 @@ public final class IndexOfCoincidence {
         }
         String cleaned = cleanedBuilder.toString();
 
-        double[] avgIC = new double[maxKeyLength + 1]; // ایندکس 0 استفاده نمی‌شود
+        double[] avgIC = new double[maxKeyLength + 1]; 
         for (int L = 1; L <= maxKeyLength; L++) {
             List<StringBuilder> columns = new ArrayList<>();
             for (int c = 0; c < L; c++) columns.add(new StringBuilder());
@@ -74,7 +61,7 @@ public final class IndexOfCoincidence {
         return avgIC;
     }
 
-    /** مرجع تقریبی IC زبان انگلیسی طبیعی، برای مقایسه در گزارش و انتخاب بهترین L */
+    
     public static final double ENGLISH_NATURAL_IC = 0.0667;
-    public static final double RANDOM_TEXT_IC_ENGLISH = 1.0 / 26.0; // ≈ 0.0385
+    public static final double RANDOM_TEXT_IC_ENGLISH = 1.0 / 26.0; 
 }
