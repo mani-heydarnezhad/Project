@@ -2,15 +2,7 @@ package util;
 
 import java.math.BigInteger;
 
-/**
- * محاسبه‌ی اندازه‌ی فضای کلید هر رمز کلاسیک و مقایسه‌ی زمان لازم برای
- * جستجوی فراگیر (brute-force)، مطابق بخش ۸ گزارش (جدول مقایسه‌ای).
- *
- * فرمول‌ها:
- *   سزار:      |K| = n
- *   جانشینی:   |K| = n!
- *   ویژنر:      |K| = n^L   (برای طول کلید مشخص L)
- */
+
 public final class KeySpaceCalculator {
 
     private KeySpaceCalculator() {

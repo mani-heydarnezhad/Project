@@ -1,12 +1,6 @@
 package util;
 
-/**
- * نگاشت الفبا به اعداد صحیح (Z_n) برای عملیات پیمانه‌ای رمزهای کلاسیک.
- * دو الفبا پشتیبانی می‌شود: انگلیسی (n = 26) و فارسی (n = 32).
- *
- * این کلاس پیاده‌سازی مستقیم مدل ریاضی بخش ۲ گزارش است:
- *   E(x) = (x + k) mod n
- */
+
 public final class Alphabet {
 
     public static final String ENGLISH = "abcdefghijklmnopqrstuvwxyz";
@@ -30,7 +24,6 @@ public final class Alphabet {
         return new Alphabet(PERSIAN);
     }
 
-    // اندازه الفبا n (مطابق فرمول |K| = n در گزارش، بخش ۲.۲) 
     public int size() {
         return n;
     }
@@ -40,13 +33,11 @@ public final class Alphabet {
         return indexOf(c) >= 0;
     }
 
-    // نگاشت حرف -> عدد در Z_n ؛ اگر عضو الفبا نباشد -1 برمی‌گرداند
     public int indexOf(char c) {
         char lower = Character.toLowerCase(c);
         return letters.indexOf(lower);
     }
 
-    // نگاشت عدد در Z_n -> حرف؛ حالت حروف بزرگ لاتین اصلی حفظ می‌شود 
     public char charAt(int index, boolean upperCase) {
         int m = Math.floorMod(index, n);
         char c = letters.charAt(m);

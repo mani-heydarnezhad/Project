@@ -3,17 +3,11 @@ package util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * استخراج جدول فراوانی حروف از یک متن (پیکره)، و نگهداری جداول فراوانی مرجع
- * زبان انگلیسی و فارسی که در فرمول chi-squared بخش ۲.۲ گزارش (Ei) استفاده می‌شوند.
- *
- * فرمول chi-squared:
- *   χ²(k) = Σ (Oi − Ei)² / Ei
- */
+
 public final class FrequencyTable {
 
     private final Alphabet alphabet;
-    private final double[] relativeFrequency; // درصد فراوانی هر حرف (جمع = ~100)
+    private final double[] relativeFrequency; 
 
     private FrequencyTable(Alphabet alphabet, double[] relativeFrequency) {
         this.alphabet = alphabet;
@@ -37,7 +31,7 @@ public final class FrequencyTable {
         return new FrequencyTable(Alphabet.persian(), freq);
     }
 
-    /** استخراج جدول فراوانی از یک متن دلخواه (پیکره) - بخش الزامی کامیت نفر A */
+    
     public static FrequencyTable fromCorpus(String corpus, Alphabet alphabet) {
         long[] counts = new long[alphabet.size()];
         long total = 0;
